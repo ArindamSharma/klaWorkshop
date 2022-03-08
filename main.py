@@ -15,14 +15,20 @@ def log(*arg,**kwarg):
 
 def timeFunction(taskName,data):
     param=""
+    print(data[C.INPUTS])
     for p in data[C.INPUTS].values():
         param+=p+','
     log(dt.now(),";",taskName," ",C.EXECUTE," ",data[C.FUNCTION],"(",param[:-1],")")
     exeTime=int(data[C.INPUTS][C.EXECUTIONTIME])
     sleep(exeTime)
 
-def dataLoadFunction(taskName,filename):
-    tmp=pd.read_csv(C.DIRECTORY+"/"+filename)
+def dataLoadFunction(taskName,data):
+    param=""
+    for p in data[C.INPUTS].values():
+        param+=p+','
+    log(dt.now(),";",taskName," ",C.EXECUTE," ",data[C.FUNCTION],"(",param[:-1],")")
+    
+    tmp=pd.read_csv(C.DIRECTORY+"/"+data[C.INPUTS][C.FILENAME])
     C.CSVDATA[taskName+"."+C.NOOFDEFECTS]=str(len(tmp))
     print(taskName,C.CSVDATA)
 
@@ -50,7 +56,7 @@ def taskHandler(taskName,data)->None:
             if(data[C.FUNCTION]==C.TIMEFUNCTION):
                 timeFunction(taskName,data)
             elif(data[C.FUNCTION]==C.DATALOAD):
-                dataLoadFunction(taskName,data[C.INPUTS][C.FILENAME])
+                dataLoadFunction(taskName,data)
             else:
                 raise ValueError("Unknown Function Type Passed ",data[C.FUNCTION])
         else:
@@ -62,7 +68,7 @@ def taskHandler(taskName,data)->None:
         if(data[C.FUNCTION]==C.TIMEFUNCTION):
             timeFunction(taskName,data)
         elif(data[C.FUNCTION]==C.DATALOAD):
-            dataLoadFunction(taskName,data[C.INPUTS][C.FILENAME])
+            dataLoadFunction(taskName,data)
         else:
             raise ValueError("Unknown Function Type Passed ",data[C.FUNCTION])
         
@@ -127,5 +133,8 @@ if __name__=="__main__":
     
     with open("M2Alog.txt","w") as logFile:
         milestone("Milestone2","Milestone2A.yaml")
+
+    with open("M2Blog.txt","w") as logFile:
+        milestone("Milestone2","Milestone2B.yaml")
 
     
