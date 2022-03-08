@@ -1,5 +1,3 @@
-from operator import index
-from sqlite3 import paramstyle
 from time import sleep
 import yaml
 import pandas as pd
