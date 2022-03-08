@@ -19,7 +19,7 @@ def taskHandler(taskName,data):
     log(dt.now(),";",taskName," Entry")
     log(dt.now(),";",taskName," Execution ",data[C.FUNCTION],tuple(data[C.INPUTS].values()))
     exeTime=int(data[C.INPUTS][C.EXECUTIONTIME])
-    sleep(exeTime)
+    # sleep(exeTime)
     log(dt.now(),";",taskName," Exit")
 
 def flowHandler(flowName,data):
@@ -39,7 +39,22 @@ def flowHandler(flowName,data):
                 raise ValueError("Unknown Activity Type passed ",data[C.ACTIVITIES][activity][C.TYPE])
 
     elif(data[C.EXECUTION]==C.CONCURRENT):
-        taskHandler(flowName+"."+activity,data[C.ACTIVITIES][activity])
+        threadList=[]
+        for activity in data[C.ACTIVITIES]:
+            if(data[C.ACTIVITIES][activity][C.TYPE]==C.TASK):
+                currentThread=threading.Thread(target=taskHandler,args=(flowName+"."+activity,data[C.ACTIVITIES][activity]))
+                threadList.append(currentThread)
+                currentThread.start()
+                # taskHandler(flowName+"."+activity,data[C.ACTIVITIES][activity])
+            elif(data[C.ACTIVITIES][activity][C.TYPE]==C.FLOW):
+                currentThread=threading.Thread(target=flowHandler,args=(flowName+"."+activity,data[C.ACTIVITIES][activity]))
+                threadList.append(currentThread)
+                currentThread.start()
+                # flowHandler(flowName+"."+activity,data[C.ACTIVITIES][activity])
+            else:
+                raise ValueError("Unknown Activity Type passed ",data[C.ACTIVITIES][activity][C.TYPE])
+        for localThread in threadList:
+            localThread.join()
     else:
         raise ValueError("Unknown Execution Parameter passed",data[C.EXECUTION])
     
@@ -52,6 +67,5 @@ def milestone(path):
             flowHandler(flowName,flowData[flowName])
 
 if __name__=="__main__":
-    clock=0
     milestone("Milestone1/Milestone1A.yaml")
     # milestone("Milestone1/Milestone1B.yaml")
