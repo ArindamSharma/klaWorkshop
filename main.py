@@ -1,3 +1,4 @@
+from sqlite3 import paramstyle
 from time import sleep
 import yaml
 import pandas as pd
@@ -7,7 +8,9 @@ import threading
 
 
 def log(*arg,**kwarg):
+    global logFile
     print(*arg,**kwarg,sep="")
+    logFile.writelines([str(i) for i in arg]+["\n"])
     # print(*arg,**kwarg)
 
 def taskHandler(taskName,data):
@@ -17,9 +20,12 @@ def taskHandler(taskName,data):
         raise ValueError("FlowType required 'Flow', given ",data[C.TYPE])
 
     log(dt.now(),";",taskName," Entry")
-    log(dt.now(),";",taskName," Execution ",data[C.FUNCTION],tuple(data[C.INPUTS].values()))
+    param=""
+    for p in data[C.INPUTS].values():
+        param+=p+','
+    log(dt.now(),";",taskName," Executing ",data[C.FUNCTION],"(",param[:-1],")")
     exeTime=int(data[C.INPUTS][C.EXECUTIONTIME])
-    # sleep(exeTime)
+    sleep(exeTime)
     log(dt.now(),";",taskName," Exit")
 
 def flowHandler(flowName,data):
@@ -60,12 +66,25 @@ def flowHandler(flowName,data):
     
     log(dt.now(),";",flowName," Exit")
 
-def milestone(path):
+def milestone1(path):
     with open(path,"r") as f:
         flowData=yaml.safe_load(f)
         for flowName in flowData:
             flowHandler(flowName,flowData[flowName])
 
+
+def milestone2(path):
+    pass
+
 if __name__=="__main__":
-    milestone("Milestone1/Milestone1A.yaml")
-    # milestone("Milestone1/Milestone1B.yaml")
+
+    with open("M1Alog.txt","w") as logFile:
+        milestone1("Milestone1/Milestone1A.yaml")
+
+    with open("M1Blog.txt","w") as logFile:
+        milestone1("Milestone1/Milestone1B.yaml")
+    
+    # with open("M2Alog.txt","w") as logFile:
+    #     milestone1("Milestone2/Milestone2A.yaml","Milestone2/Milestone2A.yaml")
+
+    
