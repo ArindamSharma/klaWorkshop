@@ -1,0 +1,71 @@
+M2B_Workflow :
+  Type : Flow 
+  Execution : Sequential
+  Activities :
+    TaskA :
+      Type : Task
+      Function : "DataLoad"
+      Inputs : { Filename : "Milestone2B_DataInput1.csv" }
+      Outputs : [ DataTable, NoOfDefects ]
+    FlowA :
+      Type : Flow
+      Execution : Concurrent
+      Activities :
+        TaskB :
+          Type : Task
+          Function : "TimeFunction"
+          Condition : "$(M2B_Workflow.TaskA.NoOfDefects) > 0"
+          Inputs : { FunctionInput : "TaskB_Input", ExecutionTime : "16" }
+        TaskC :
+          Type : Task
+          Function : "DataLoad"
+          Inputs : { Filename : "Milestone2B_DataInput1.csv" }
+          Outputs : [ DataTable, NoOfDefects ]
+        TaskD :
+          Type : Task
+          Function : "TimeFunction"
+          Condition : "$(M2B_Workflow.TaskA.NoOfDefects) < 10"
+          Inputs : { FunctionInput : "TaskD_Input", ExecutionTime : "5" }
+        FlowB :
+          Type : Flow
+          Execution : Sequential
+          Activities :
+            TaskE :
+              Type : Task
+              Function : "DataLoad"
+              Inputs : { Filename : "Milestone2B_DataInput2.csv" }
+              Outputs : [ DataTable, NoOfDefects ]
+            TaskF :
+              Type : Task
+              Function : "TimeFunction"
+              Inputs : { FunctionInput : "$(M2B_Workflow.FlowA.FlowB.TaskE.NoOfDefects)", ExecutionTime : "5" }
+        FlowC :
+          Type : Flow
+          Execution : Sequential
+          Activities :
+            TaskG :
+              Type : Task
+              Function : "TimeFunction"
+              Inputs : { FunctionInput : "TaskG_Input", ExecutionTime : "0" }
+            TaskH :
+              Type : Task
+              Function : "TimeFunction"
+              Inputs : { FunctionInput : "TaskH_Input", ExecutionTime : "0" }
+        TaskI :
+          Type : Task
+          Function : "TimeFunction"
+          Condition : "$(M2B_Workflow.FlowA.TaskC.NoOfDefects) > 10"
+          Inputs : { FunctionInput : "$(M2B_Workflow.FlowA.TaskC.NoOfDefects)", ExecutionTime : "5" }
+    FlowD :
+      Type : Flow
+      Execution : Concurrent
+      Activities :
+        TaskJ :
+          Type : Task
+          Function : "TimeFunction"
+          Condition : "$(M2B_Workflow.FlowA.FlowB.TaskE.NoOfDefects) > 0"
+          Inputs : { FunctionInput : "TaskJ_Input", ExecutionTime : "1" }
+        TaskZ :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "$(M2B_Workflow.TaskA.NoOfDefects)", ExecutionTime : "2" }

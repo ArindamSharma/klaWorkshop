@@ -1,0 +1,57 @@
+# Milestone 3A input file
+# Funtions defined : 
+#       Functions                   Description
+#       1. Binning                  Function should take a rule file & a dataset as input. Based on rule file, function will perform binning and generate a output dataset with updated Bin_ID & dataset count
+#       2. MergeResults             Function should take multiple defect table with their BinID and precedence file as input.
+#                                   Different defect table can have different Bin_ID for a same defect. if a defect falls on more than one Bin_ID the precedence file will be used to resolve the conflict
+#                                   Similar to Binning, it'll generate a single output dataset & count of that dataset
+#       3. ExportResults            Function should take any dataset as input and export it to a csv file
+
+M3A_Workflow :
+  Type : Flow
+  Execution : Sequential
+  Activities :
+      LoadData :
+        Type : Task
+        Function : "DataLoad"
+        Inputs : { Filename : "Milestone3_DataInput_Example.csv" }
+        Outputs : [ DataTable, NoOfDefects  ]
+      BinningProcess :
+        Type : Flow
+        Execution : Concurrent
+        Activities:
+          BinningFor500 :
+            Type : Task
+            Function : "Binning"
+            Condition: "$(M3A_Workflow.LoadData.NoOfDefects) > 0"
+            Inputs : { 
+                RuleFilename: "Milestone3A_BinningRule_500.csv", 
+                DataSet : "$(M3A_Workflow.LoadData.DataTable)"
+            }
+            Outputs : [ BinningResultsTable, NoOfDefects ]
+          BinningFor501 :
+            Type : Task
+            Function : "Binning"
+            Condition: "$(M3A_Workflow.LoadData.NoOfDefects) > 0"
+            Inputs : { 
+                RuleFilename: "Milestone3A_BinningRule_501.csv", 
+                DataSet : "$(M3A_Workflow.LoadData.DataTable)"
+            }
+            Outputs : [ BinningResultsTable, NoOfDefects ]
+      MergeBinningResults :
+        Type : Task
+        Function : "MergeResults"
+        Inputs : {
+            PrecedenceFile : "Milestone3A_PrecedenceFile1.txt",
+            DataSet1 : "$(M3A_Workflow.BinningProcess.BinningFor500.BinningResultsTable)",
+            DataSet2 : "$(M3A_Workflow.BinningProcess.BinningFor501.BinningResultsTable)"
+        }
+        Outputs : [ MergedResults, NoOfDefects ]
+      ExportResult :
+        Type : Task
+        Function : "ExportResults"
+        Inputs : {
+            FileName : "Milestone3_DataOutput_Example.csv",
+            DefectTable : "$(M3A_Workflow.MergeBinningResults.MergedResults)"
+        }
+        Outputs : [ ]

@@ -1,0 +1,16 @@
+2022-03-07 10:00:07.000000;M1SampleWorkFlow Entry
+2022-03-07 10:00:07.000000;M1SampleWorkFlow.M1SampleTask1 Entry
+2022-03-07 10:00:07.000000;M1SampleWorkFlow.M1SampleTask1 Executing TimeFunction (Task1_Input, 1)
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleTask1 Exit
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleTask2 Entry
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleTask2 Executing TimeFunction (Task2_Input, 0)
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleTask2 Exit
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleSubFlow Entry
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleSubFlow.M1SampleSubTask1 Entry
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleSubFlow.M1SampleSubTask1 Executing TimeFunction (SubTask1_Input, 1)
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleSubFlow.M1SampleSubTask2 Entry
+2022-03-07 10:00:08.000000;M1SampleWorkFlow.M1SampleSubFlow.M1SampleSubTask2 Executing TimeFunction (SubTask2_Input, 2)
+2022-03-07 10:00:09.000000;M1SampleWorkFlow.M1SampleSubFlow.M1SampleSubTask1 Exit
+2022-03-07 10:00:10.000000;M1SampleWorkFlow.M1SampleSubFlow.M1SampleSubTask2 Exit
+2022-03-07 10:00:10.000000;M1SampleWorkFlow.M1SampleSubFlow Exit
+2022-03-07 10:00:10.000000;M1SampleWorkFlow Exit

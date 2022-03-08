@@ -1,0 +1,40 @@
+M2A_Workflow :
+  Type : Flow 
+  Execution : Sequential
+  Activities :
+    TaskA :
+      Type : Task
+      Function : "DataLoad"
+      Inputs : { Filename : "Milestone2A_DataInput1.csv" }
+      Outputs : [ DataTable, NoOfDefects ]
+    TaskB :
+      Type : Task
+      Function : "TimeFunction"
+      Inputs : { FunctionInput : "TaskB_Input", ExecutionTime : "2" }
+    FlowA :
+      Type : Flow
+      Execution : Concurrent
+      Activities :
+        TaskC :
+          Type : Task
+          Function : "DataLoad"
+          Condition : "$(M2A_Workflow.TaskA.NoOfDefects) > 4"
+          Inputs : { Filename: "Milestone2A_DataInput2.csv" }
+          Outputs : [ DataTable, NoOfDefects ]
+        TaskD :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "TaskD_Input", ExecutionTime : "2" }
+        FlowB :
+          Type : Flow
+          Execution : Concurrent
+          Activities :
+            TaskE :
+              Type : Task
+              Function : "TimeFunction"
+              Condition: "$(M2A_Workflow.FlowA.TaskC.NoOfDefects) < 6"
+              Inputs : { FunctionInput : "TaskE_Input", ExecutionTime : "2" }
+            TaskF :
+              Type : Task
+              Function : "TimeFunction"
+              Inputs : { FunctionInput : "TaskF_Input", ExecutionTime : "2" }

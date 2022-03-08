@@ -1,0 +1,3 @@
+BIN_ID,RULE
+504,Signal > 199 and Signal < 256
+

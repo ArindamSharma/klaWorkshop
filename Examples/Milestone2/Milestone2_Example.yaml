@@ -1,0 +1,20 @@
+M2SampleWorkFlow :
+  Type : Flow 
+  Execution : Sequential
+  Activities :
+    M2SampleTask1 :
+      Type : Task
+      Function : "DataLoad"
+      Inputs : { Filename : "M2SampleTaskInput.csv" }
+      Outputs : [ DataTable, NoOfDefects ]
+    M2SampleTask2 :
+      Type : Task
+      Function : "TimeFunction"
+      Condition : "$(M2SampleTask1.NoOfDefects) > 10"
+      Inputs : { FunctionInput : "$(M2SampleTask1.NoOfDefects)", ExecutionTime : "2" }  
+    M2SampleTask2 :
+      Type : Task
+      Function : "TimeFunction"
+      Condition : "$(M2SampleTask1.NoOfDefects) < 10"
+      Inputs : { FunctionInput : "$(M2SampleTask1.NoOfDefects)", ExecutionTime : "3" }
+

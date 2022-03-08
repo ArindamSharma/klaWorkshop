@@ -1,0 +1,11 @@
+2022-03-07 10:20:54.000000;M2SampleWorkFlow Entry
+2022-03-07 10:20:54.000000;M2SampleWorkFlow.M2SampleTask1 Entry
+2022-03-07 10:20:54.000000;M2SampleWorkFlow.M2SampleTask1 Executing DataLoad (M2SampleTaskInput.csv)
+2022-03-07 10:20:54.000000;M2SampleWorkFlow.M2SampleTask1 Exit
+2022-03-07 10:20:54.000000;M2SampleWorkFlow.M2SampleTask2 Entry
+2022-03-07 10:20:54.000000;M2SampleWorkFlow.M2SampleTask2 Executing TimeFunction (14, 2)
+2022-03-07 10:20:56.000000;M2SampleWorkFlow.M2SampleTask2 Exit
+2022-03-07 10:20:57.000000;M2SampleWorkFlow.M2SampleTask3 Entry
+2022-03-07 10:20:57.000000;M2SampleWorkFlow.M2SampleTask3 Skipped
+2022-03-07 10:20:57.000000;M2SampleWorkFlow.M2SampleTask3 Exit
+2022-03-07 10:20:57.000000;M2SampleWorkFlow Exit

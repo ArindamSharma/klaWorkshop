@@ -1,0 +1,2 @@
+BIN_ID,RULE
+500,Signal < 60

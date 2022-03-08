@@ -1,0 +1,24 @@
+M1A_Workflow :
+  Type : Flow 
+  Execution : Sequential
+  Activities :
+    TaskA :
+      Type : Task
+      Function : "TimeFunction"
+      Inputs : { FunctionInput : "TaskA_Input", ExecutionTime : "1" }
+    TaskB :
+      Type : Task
+      Function : "TimeFunction"
+      Inputs : { FunctionInput : "TaskB_Input", ExecutionTime : "2" }
+    FlowA :
+      Type : Flow
+      Execution : Sequential
+      Activities :
+        TaskC :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "TaskC_Input", ExecutionTime : "3" }
+        TaskD :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "TaskD_Input", ExecutionTime : "4" }

@@ -1,0 +1,56 @@
+M1B_Workflow :
+  Type : Flow 
+  Execution : Sequential
+  Activities :
+    TaskA :
+      Type : Task
+      Function : "TimeFunction"
+      Inputs : { FunctionInput : "TaskA_Input", ExecutionTime : "1" }
+    FlowA :
+      Type : Flow
+      Execution : Concurrent
+      Activities :
+        TaskB :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "TaskB_Input", ExecutionTime : "14" }
+        TaskC :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "TaskC_Input", ExecutionTime : "5" }
+        TaskD :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "TaskD_Input", ExecutionTime : "5" }
+        FlowB :
+          Type : Flow
+          Execution : Sequential
+          Activities :
+            TaskE :
+              Type : Task
+              Function : "TimeFunction"
+              Inputs : { FunctionInput : "TaskE_Input", ExecutionTime : "5" }
+            TaskF :
+              Type : Task
+              Function : "TimeFunction"
+              Inputs : { FunctionInput : "TaskF_Input", ExecutionTime : "1" }
+        FlowC :
+          Type : Flow
+          Execution : Sequential
+          Activities :
+            TaskG :
+              Type : Task
+              Function : "TimeFunction"
+              Inputs : { FunctionInput : "TaskG_Input", ExecutionTime : "2" }
+            TaskH :
+              Type : Task
+              Function : "TimeFunction"
+              Inputs : { FunctionInput : "TaskH_Input", ExecutionTime : "2" }
+        TaskI :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "TaskI_Input", ExecutionTime : "5"  }
+    TaskZ :
+      Type : Task
+      Function : "TimeFunction"
+      Inputs : { FunctionInput : "TaskZ_Input", ExecutionTime : "5" }

@@ -1,0 +1,2 @@
+BIN_ID,RULE
+502,Signal > 99 and Signal < 130

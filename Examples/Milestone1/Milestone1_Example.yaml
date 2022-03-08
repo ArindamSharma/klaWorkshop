@@ -1,0 +1,25 @@
+M1SampleWorkFlow :
+  Type : Flow 
+  Execution : Sequential
+  Activities :
+    M1SampleTask1 :
+      Type : Task
+      Function : "TimeFunction"
+      Inputs : { FunctionInput : "Task1_Input", ExecutionTime : "1" }
+    M1SampleTask2 :
+      Type : Task
+      Function : "TimeFunction"
+      Inputs : { FunctionInput : "Task2_Input", ExecutionTime : "0" }
+    M1SampleSubFlow :
+      Type : Flow
+      Execution : Concurrent
+      Activities :
+        M1SampleSubTask1 :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "SubTask1_Input", ExecutionTime : "1" }
+        M1SampleSubTask2 :
+          Type : Task
+          Function : "TimeFunction"
+          Inputs : { FunctionInput : "SubTask2_Input", ExecutionTime : "2" }
+
