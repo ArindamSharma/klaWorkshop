@@ -23,6 +23,8 @@ def parseKey(string:str)->str:
 
 
 def binning(rule:pd.DataFrame,table:pd.DataFrame)->pd.DataFrame:
+    '''This Function Is Used to add Bin Code to the Input Table according to rules
+    return a Dataframe'''
     data=pd.DataFrame(columns=[*table.keys()]+[C.BIN_ID])
     count=0
     for b in range(len(rule)):
@@ -34,6 +36,7 @@ def binning(rule:pd.DataFrame,table:pd.DataFrame)->pd.DataFrame:
     return data
 
 def orderFile(filename:str)->dict:
+    """Read Rules from File and Return a Dictionary With the Order"""
     string=None
     with open(filename,"r") as f:
         string=f.readline()
@@ -45,6 +48,7 @@ def orderFile(filename:str)->dict:
     return d
 
 def orderValidator(val1:int,val2:int,order:dict)->bool:
+    """This Function is use to validate bicode as per the rules dictionary passed """
     if(val1 not in order or val1 not in order):
         raise Exception("Error")
     if(order[val1]>order[val2]):
@@ -52,6 +56,8 @@ def orderValidator(val1:int,val2:int,order:dict)->bool:
     return val1
 
 def mergebins(validationFile:str,*toMergeTable:pd.DataFrame)->pd.DataFrame:
+    """This Function is takes Rules File Name as first parameter and variable Dataframes as further parameters
+    and return the merged table Dataframe with Applied rules from the file"""
     order=orderFile(validationFile)
     if(len(toMergeTable)==0):
         raise Exception("No Table Passed ")
@@ -70,6 +76,7 @@ def mergebins(validationFile:str,*toMergeTable:pd.DataFrame)->pd.DataFrame:
 
 # User Defined Functions
 def mergeResult(taskName:str,data:dict)->None:
+    """This Function Calls Merge bin Function with Parameters definec in Configure File"""
     log(dt.now(),";",taskName," ",C.EXECUTE," ",data[C.FUNCTION],"(",")")
     dataframeList=[]
     for key in data[C.INPUTS]:
@@ -79,10 +86,12 @@ def mergeResult(taskName:str,data:dict)->None:
     C.CSVDATA[taskName+"."+C.MERGEDRESULTS].rename(columns={C.BIN_ID:C.BINCODE},inplace=True)
 
 def exportResult(taskName:str,data:dict)->None:
+    """This Function Finally Saves the CSV to the Path mentioned in the Config /YAML file"""
     log(dt.now(),";",taskName," ",C.EXECUTE," ",data[C.FUNCTION],"(",")")
     C.CSVDATA[parseKey(data[C.INPUTS][C.DEFECTTABLE])].to_csv(C.DIRECTORY+"/"+data[C.INPUTS][C.EXPORTFILENAME],index=False)
 
 def binningFunction(taskName:str,data:dict)->None:
+    """Bin Function Binns the Table into Binned Table where it follow certain Rules which also need to be mentioned in the Yaml file"""
     log(dt.now(),";",taskName," ",C.EXECUTE," ",data[C.FUNCTION],"(",")")
     table=C.CSVDATA[parseKey(data[C.INPUTS][C.DATASET])].copy()
     rule=pd.read_csv(C.DIRECTORY+"/"+data[C.INPUTS][C.RULEFILENAME])

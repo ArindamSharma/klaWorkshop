@@ -1,28 +1,28 @@
-2022-03-08 17:17:37.334835;M3A_Workflow Entry
-2022-03-08 17:17:37.334835;M3A_Workflow.LoadData Entry
-2022-03-08 17:17:37.334835;M3A_Workflow.LoadData Executing DataLoad(Milestone3A_DataInput1.csv)
-2022-03-08 17:17:37.339822;M3A_Workflow.LoadData Exit
-2022-03-08 17:17:37.339822;M3A_Workflow.BinningProcess Entry
-2022-03-08 17:17:37.341832;M3A_Workflow.BinningProcess.BinningFor500 Entry
-2022-03-08 17:17:37.341832;M3A_Workflow.BinningProcess.BinningFor500 Executing Binning()
-2022-03-08 17:17:37.342824;M3A_Workflow.BinningProcess.BinningFor501 Entry
-2022-03-08 17:17:37.342824;M3A_Workflow.BinningProcess.BinningFor502 Entry
-2022-03-08 17:17:37.342824;M3A_Workflow.BinningProcess.BinningFor503 Entry
-2022-03-08 17:17:37.343813;M3A_Workflow.BinningProcess.BinningFor504 Entry
-2022-03-08 17:17:37.342824;M3A_Workflow.BinningProcess.BinningFor501 Executing Binning()
-2022-03-08 17:17:37.343813;M3A_Workflow.BinningProcess.BinningFor502 Executing Binning()
-2022-03-08 17:17:37.345807;M3A_Workflow.BinningProcess.BinningFor503 Executing Binning()
-2022-03-08 17:17:37.347802;M3A_Workflow.BinningProcess.BinningFor504 Executing Binning()
-2022-03-08 17:17:39.326383;M3A_Workflow.BinningProcess.BinningFor503 Exit
-2022-03-08 17:17:40.087348;M3A_Workflow.BinningProcess.BinningFor500 Exit
-2022-03-08 17:17:40.399514;M3A_Workflow.BinningProcess.BinningFor504 Exit
-2022-03-08 17:17:41.040993;M3A_Workflow.BinningProcess.BinningFor502 Exit
-2022-03-08 17:17:42.374451;M3A_Workflow.BinningProcess.BinningFor501 Exit
-2022-03-08 17:17:42.374812;M3A_Workflow.BinningProcess Exit
-2022-03-08 17:17:42.374812;M3A_Workflow.MergeBinningResults Entry
-2022-03-08 17:17:42.374812;M3A_Workflow.MergeBinningResults Executing MergeResults()
-2022-03-08 17:17:47.258172;M3A_Workflow.MergeBinningResults Exit
-2022-03-08 17:17:47.258172;M3A_Workflow.ExportResult Entry
-2022-03-08 17:17:47.259135;M3A_Workflow.ExportResult Executing ExportResults()
-2022-03-08 17:17:47.269109;M3A_Workflow.ExportResult Exit
-2022-03-08 17:17:47.269109;M3A_Workflow Exit
+2022-03-08 17:23:25.734754;M3A_Workflow Entry
+2022-03-08 17:23:25.734754;M3A_Workflow.LoadData Entry
+2022-03-08 17:23:25.734754;M3A_Workflow.LoadData Executing DataLoad(Milestone3A_DataInput1.csv)
+2022-03-08 17:23:25.738744;M3A_Workflow.LoadData Exit
+2022-03-08 17:23:25.738744;M3A_Workflow.BinningProcess Entry
+2022-03-08 17:23:25.739742;M3A_Workflow.BinningProcess.BinningFor500 Entry
+2022-03-08 17:23:25.740739;M3A_Workflow.BinningProcess.BinningFor500 Executing Binning()
+2022-03-08 17:23:25.740739;M3A_Workflow.BinningProcess.BinningFor501 Entry
+2022-03-08 17:23:25.740739;M3A_Workflow.BinningProcess.BinningFor502 Entry
+2022-03-08 17:23:25.740739;M3A_Workflow.BinningProcess.BinningFor503 Entry
+2022-03-08 17:23:25.741736;M3A_Workflow.BinningProcess.BinningFor504 Entry
+2022-03-08 17:23:25.740739;M3A_Workflow.BinningProcess.BinningFor501 Executing Binning()
+2022-03-08 17:23:25.741736;M3A_Workflow.BinningProcess.BinningFor502 Executing Binning()
+2022-03-08 17:23:25.741736;M3A_Workflow.BinningProcess.BinningFor503 Executing Binning()
+2022-03-08 17:23:25.747720;M3A_Workflow.BinningProcess.BinningFor504 Executing Binning()
+2022-03-08 17:23:27.806957;M3A_Workflow.BinningProcess.BinningFor503 Exit
+2022-03-08 17:23:28.636738;M3A_Workflow.BinningProcess.BinningFor500 Exit
+2022-03-08 17:23:28.860772;M3A_Workflow.BinningProcess.BinningFor504 Exit
+2022-03-08 17:23:29.657115;M3A_Workflow.BinningProcess.BinningFor502 Exit
+2022-03-08 17:23:31.409681;M3A_Workflow.BinningProcess.BinningFor501 Exit
+2022-03-08 17:23:31.409681;M3A_Workflow.BinningProcess Exit
+2022-03-08 17:23:31.409681;M3A_Workflow.MergeBinningResults Entry
+2022-03-08 17:23:31.409681;M3A_Workflow.MergeBinningResults Executing MergeResults()
+2022-03-08 17:23:36.873182;M3A_Workflow.MergeBinningResults Exit
+2022-03-08 17:23:36.873182;M3A_Workflow.ExportResult Entry
+2022-03-08 17:23:36.873182;M3A_Workflow.ExportResult Executing ExportResults()
+2022-03-08 17:23:36.883180;M3A_Workflow.ExportResult Exit
+2022-03-08 17:23:36.883180;M3A_Workflow Exit
