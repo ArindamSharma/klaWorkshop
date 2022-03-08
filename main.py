@@ -14,11 +14,12 @@ def log(*arg,**kwarg):
     # print(*arg,**kwarg)
 
 def timeFunction(taskName,data):
-    param=""
-    print(data[C.INPUTS])
-    for p in data[C.INPUTS].values():
-        param+=p+','
-    log(dt.now(),";",taskName," ",C.EXECUTE," ",data[C.FUNCTION],"(",param[:-1],")")
+    # print(data[C.INPUTS])
+    if(C.FUNCTIONINPUT in data[C.INPUTS]):
+        tmp=data[C.INPUTS][C.FUNCTIONINPUT].strip("$").strip("(").strip(")")
+        if(tmp in C.CSVDATA):
+            data[C.INPUTS][C.FUNCTIONINPUT]=C.CSVDATA[tmp]
+    log(dt.now(),";",taskName," ",C.EXECUTE," ",data[C.FUNCTION],"(",data[C.INPUTS][C.FUNCTIONINPUT],",",data[C.INPUTS][C.EXECUTIONTIME],")")
     exeTime=int(data[C.INPUTS][C.EXECUTIONTIME])
     sleep(exeTime)
 
@@ -30,7 +31,7 @@ def dataLoadFunction(taskName,data):
     
     tmp=pd.read_csv(C.DIRECTORY+"/"+data[C.INPUTS][C.FILENAME])
     C.CSVDATA[taskName+"."+C.NOOFDEFECTS]=str(len(tmp))
-    print(taskName,C.CSVDATA)
+    # print(taskName,C.CSVDATA)
 
 def conditionValidation(condition)->bool:
     
@@ -52,7 +53,7 @@ def taskHandler(taskName,data)->None:
     
     if(C.CONDITION in data):
         if(conditionValidation(data[C.CONDITION])):
-            print("Condition True")
+            # print("Condition True")
             if(data[C.FUNCTION]==C.TIMEFUNCTION):
                 timeFunction(taskName,data)
             elif(data[C.FUNCTION]==C.DATALOAD):
@@ -60,10 +61,10 @@ def taskHandler(taskName,data)->None:
             else:
                 raise ValueError("Unknown Function Type Passed ",data[C.FUNCTION])
         else:
-            print("Condition True")
+            # print("Condition True")
             log(dt.now(),";",taskName," "+C.SKIPPED)
     else:
-        print("Condition Dont Exist")
+        # print("Condition Dont Exist")
         
         if(data[C.FUNCTION]==C.TIMEFUNCTION):
             timeFunction(taskName,data)
@@ -131,10 +132,13 @@ if __name__=="__main__":
     # with open("M1Blog.txt","w") as logFile:
     #     milestone("Milestone1/Milestone1B.yaml")
     
-    with open("M2Alog.txt","w") as logFile:
-        milestone("Milestone2","Milestone2A.yaml")
+    # with open("M2Alog.txt","w") as logFile:
+    #     milestone("Milestone2","Milestone2A.yaml")
 
     with open("M2Blog.txt","w") as logFile:
         milestone("Milestone2","Milestone2B.yaml")
+
+    with open("M3Alog.txt","w") as logFile:
+        milestone("Milestone3","Milestone3A.yaml")
 
     
