@@ -135,8 +135,8 @@ if __name__=="__main__":
     # with open("M2Alog.txt","w") as logFile:
     #     milestone("Milestone2","Milestone2A.yaml")
 
-    with open("M2Blog.txt","w") as logFile:
-        milestone("Milestone2","Milestone2B.yaml")
+    # with open("M2Blog.txt","w") as logFile:
+    #     milestone("Milestone2","Milestone2B.yaml")
 
     with open("M3Alog.txt","w") as logFile:
         milestone("Milestone3","Milestone3A.yaml")
